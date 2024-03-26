@@ -6,7 +6,8 @@ let skills = [
   
   module.exports = {
     getAll,
-    getOne
+    getOne,
+    create
   };
   
   function getAll() {
@@ -15,4 +16,9 @@ let skills = [
   
   function getOne(id) {
     return skills.find(skill => skill.id === parseInt(id));
-  }  
+  }
+
+  function create(skill) {
+    skill.id = Math.floor(Math.random() * 1000) + skills.length; // Simplistic approach to generate a new ID
+    skills.push(skill);
+  }
