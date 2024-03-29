@@ -1,13 +1,19 @@
+// server.js
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var methodOverride = require('method-override');
 
 var indexRouter = require('./routes/index');
 var skillsRouter = require('./routes/skills');
 
 var app = express();
+
+
+/*-------------- Server Setup --------------*/
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(methodOverride('_method')); //allows you to use PUT and DELETE methods in ejs
+
+// Use routers
 app.use('/', indexRouter);
 app.use('/skills', skillsRouter);
 
